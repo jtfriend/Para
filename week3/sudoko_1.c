@@ -69,14 +69,9 @@ void randomArrayWithBlanks(int * randArray, int sizeOfArray, int filledSpots) {
 void fillBlanks(int * randArray, int sizeOfArray) {
   for(int i= 0; i< sizeOfArray; i++) {
     if (randArray[i] == 10) {
-      printf("[%d+ -  %d\n", (i), randArray[i]);
-      while (in_array(&randArray[i], &randArray[0], sizeOfArray) == 1) {
+      while ((in_array(&randArray[i], &randArray[0], sizeOfArray) == 1) || (randArray[i] == 10)) {
         randArray[i] = ((rand() % 9) + 1);
-        printf("Values checked: %d\n", randArray[i]);
       }
-      printf("[%d= -  %d\n", (i), randArray[i]);
-    } else {
-      printf("[%d- -  %d\n", (i), randArray[i]);
     }
   }
 
