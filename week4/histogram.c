@@ -38,21 +38,46 @@
 #include <omp.h>
 
 
+
+
+
+
 int main( ) {
   int randomArray[10];
   int histoVals[10];
 
-  for(int i=0; i< sizeof(randomArray); i++) {
-      randomArray[i] = 0;
+  FILE *grades;
+
+  grades = fopen("grades.txt", "r");
+
+  int save[100];
+  int look;
+
+  for (int i = 0; (fscanf(grades, "%u", &look) != EOF); i++)
+  {
+    save[i] = look;
   }
 
-  for(int i=0; i< sizeof(histoVals); i++) {
-      histoVals[randomArray[i]/10]++;
+  fclose(grades);
+
+  for(int i=0; i< 100; i++) {
+    printf(":%d \n", save[i]);
   }
 
-  for(int i=0; i< sizeof(histoVals); i++) {
-    printf("%d ", histoVals[i]);
+  for(int i=0; i< 100; i++) {
+    histoVals[(save[i]/10)-1]++;
   }
+
+  for(int i=0; i< 10; i++) {
+    printf(":%d \n", histoVals[i]);
+  }
+
+  // for(int i=0; i< 10; i++) {
+  //   printf(":%d - %d :: ",i, i+10);
+  //   for(int j=0; j< histoVals[i]; j++) {
+  //     printf("* ");
+  //   }
+  // }
 
   return 0;
 }
