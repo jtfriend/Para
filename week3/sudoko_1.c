@@ -38,6 +38,8 @@ void randomArrayWithBlanks(int * randArray, int sizeOfArray, int filledSpots) {
   printf("Size : %d\n", sizeOfArray);
   printf("Filled : %d\n", filledSpots);
 
+  
+
   for(int i=0; i<sizeOfArray; i++) {
       randArray[i] = sizeOfArray;
   }
