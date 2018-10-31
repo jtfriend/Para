@@ -37,14 +37,13 @@
 #include <stdio.h>
 #include <omp.h>
 
-
-
-
-
-
 int main( ) {
   int randomArray[10];
   int histoVals[10];
+
+  for(int i=0; i< 10; i++) {
+    histoVals[i] = 0;
+  }
 
   FILE *grades;
 
@@ -60,24 +59,27 @@ int main( ) {
 
   fclose(grades);
 
-  for(int i=0; i< 100; i++) {
-    printf(":%d \n", save[i]);
-  }
+  // for(int i=0; i< 100; i++) {
+  //   printf("-%d \n", save[i]);
+  // }
 
   for(int i=0; i< 100; i++) {
-    histoVals[(save[i]/10)-1]++;
-  }
-
-  for(int i=0; i< 10; i++) {
-    printf(":%d \n", histoVals[i]);
+  //  printf("-%d  ~%d~ \n", save[i], ((save[i]-1)/10));
+    histoVals[((save[i]-1)/10)]++;
   }
 
   // for(int i=0; i< 10; i++) {
-  //   printf(":%d - %d :: ",i, i+10);
-  //   for(int j=0; j< histoVals[i]; j++) {
-  //     printf("* ");
-  //   }
+  //   printf("%d:-:%d \n",i, histoVals[i]);
   // }
+  int num = 0
+  for(int i=0; i< 10; i++) {
+    printf(":%d - %d :: ",num, num+10);
+    for(int j=0; j< histoVals[i]; j++) {
+      printf("* ");
+    }
+    num+=10;
+    printf("\n");
+  }
 
   return 0;
 }
