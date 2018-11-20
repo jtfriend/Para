@@ -59,19 +59,11 @@ int main( ) {
 
   fclose(grades);
 
-  // for(int i=0; i< 100; i++) {
-  //   printf("-%d \n", save[i]);
-  // }
-
   for(int i=0; i< 100; i++) {
-  //  printf("-%d  ~%d~ \n", save[i], ((save[i]-1)/10));
     histoVals[((save[i]-1)/10)]++;
   }
 
-  // for(int i=0; i< 10; i++) {
-  //   printf("%d:-:%d \n",i, histoVals[i]);
-  // }
-  int num = 0
+  int num = 0;
   for(int i=0; i< 10; i++) {
     printf(":%d - %d :: ",num, num+10);
     for(int j=0; j< histoVals[i]; j++) {
