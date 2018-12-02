@@ -96,8 +96,9 @@ int main (void)
    */
 
   /* A 256 bit key */
-  // unsigned char *key = (unsigned char *)"#####000005#####";
-  unsigned char key[17] = "#####000005#####";
+//   unsigned char *key = (unsigned char *)"#####010005#####";
+  unsigned char key[17] = "#####111007#####";
+  key[17] = '\0';
 
   /* A 128 bit IV */
   unsigned char *iv = (unsigned char *)"0123456789012345";
@@ -136,75 +137,37 @@ int main (void)
 
   char *a = "0123456789";
 
-  unsigned char possPass[17] = "#####000005#####";
-  // unsigned char *possPass = (unsigned char *)"#####000005#####";
+  unsigned char possPass[17] = "#####000000#####";
 
-  encrypt (plaintext, strlen ((char *)plaintext), possPass, iv,calculatingtext);
+  possPass[17] = '\0';
+   
+  for (int n5=0; n5<escCount; n5++) {
+    possPass[5] = a[n5];
+    for (int n4=0; n4<escCount; n4++) {
+      possPass[6] = a[n4];
+      for (int n3=0; n3<escCount; n3++) {
+        possPass[7] = a[n3];
+        for (int n2=0; n2<escCount; n2++) {
+          possPass[8] = a[n2];
+          for (int n1=0; n1<escCount; n1++) {
+            possPass[9] = a[n1];
+            for (int n0=0; n0<escCount; n0++) {
+              possPass[10] = a[n0];
+              //compare calculating text with cipher text generated
 
-  for (int i=0; i<16; i++) {
-    printf("%d", ciphertext[i]);
+              printf("%s\n", possPass);
+
+              if (strcmp(possPass, key) == 0) {
+                escCount = 0;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
-  printf("\n--Calc Text\n");
-
-  for (int i=0; i<16; i++) {
-    printf("%d", calculatingtext[i]);
-  }
-
-  printf("\n");
-
-  // for (int i=0; i<16; i++) {
-    // printf("%c", possPass[i]);
-    printf("%s", possPass);
-  // }
-
-  printf("\n"); 
-
-  for (int i=0; i<16; i++) {
-    printf("%c", key[i]);
-  }
-  printf("\n"); 
-
-           
-  // for (int n5=0; n5<escCount; n5++) {
-  //   possPass[5] = a[n5];
-  //   for (int n4=0; n4<escCount; n4++) {
-  //     possPass[6] = a[n4];
-  //     for (int n3=0; n3<escCount; n3++) {
-  //       possPass[7] = a[n3];
-  //       for (int n2=0; n2<escCount; n2++) {
-  //         possPass[8] = a[n2];
-  //         for (int n1=0; n1<escCount; n1++) {
-  //           possPass[9] = a[n1];
-  //           for (int n0=0; n0<escCount; n0++) {
-  //             possPass[10] = a[n0];
-
-  //             for (int i=0; i<17; i++) {
-  //                 printf("%c", possPass[i]);
-  //             }
-  //             printf("\n");
-
-  //             encrypt (plaintext, strlen ((char *)plaintext), possPass, iv,calculatingtext);
-
-  //             for (int i=0; i<17; i++) {
-  //                 printf("%d", calculatingtext[i]);
-  //             }
-  //             printf("\n");
-
-  //             //compare calculating text with cipher text generated
-
-  //             if (strcmp(calculatingtext, ciphertext) == 0) {
-  //               escCount = 0;
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
-  decryptedtext_len = decrypt(ciphertext, ciphertext_len, key, iv, decryptedtext);
-  decryptedtext_len = decrypt(new_ciphertext, ciphertext_len, possPass, iv, new_decryptedtext);
+  decryptedtext_len = decrypt(ciphertext, ciphertext_len, possPass, iv, decryptedtext);
 
   /* Add a NULL terminator. We are expecting printable text */
   decryptedtext[decryptedtext_len] = '\0';
@@ -212,9 +175,6 @@ int main (void)
   /* Show the decrypted text */
   printf("Decrypted text is:\n");
   printf("%s\n", decryptedtext);
-
-  printf("newDecrypted text is:\n");
-  printf("%s\n", new_decryptedtext);
 
   return 0;
 }
